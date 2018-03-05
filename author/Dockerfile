@@ -35,9 +35,8 @@ wget --quiet --no-cookies http://rshare:$password@rshare.rwcms.com/Install_asset
 wget --quiet --no-cookies http://rshare:$password@rshare.rwcms.com/Install_assets/license.properties -O /opt/cq/license.properties
 WORKDIR /opt/cq
 ENV CQ_INTERFACE eth0 
-ONBUILD ADD https://raw.githubusercontent.com/ggotti/aem-author/master/org.apache.sling.commons.log.LogManager.config /opt/cq/crx-quickstart/install
-RUN java -XX:MaxPermSize=512m -Xmx4096M -jar cq-author-4502.jar -unpack -p 4502 -r author 
-#RUN java -XX:MaxPermSize=512m -Xmx4096M -jar cq-author-4502.jar -unpack -p 4502 -r author nosamplecontent   
+ADD ./aemstartupcheck.sh /opt/cq/
+RUN /opt/cq/aemstartupcheck.sh
 
 EXPOSE 4502 8000
 ENTRYPOINT ["/opt/cq/crx-quickstart/bin/quickstart"]
