@@ -35,11 +35,14 @@ wget --quiet --no-cookies http://rshare:$password@rshare.rwcms.com/Install_asset
 wget --quiet --no-cookies http://rshare:$password@rshare.rwcms.com/Install_assets/license.properties -O /opt/cq/license.properties
 WORKDIR /opt/cq
 ENV CQ_INTERFACE eth0 
-ADD ./aemstartupcheck.sh /opt/cq/
-RUN ls -l ./aemstartupcheck.sh
-RUN sed -i -e 's/\r$//' aemstartupcheck.sh
-RUN ls -l ./aemstartupcheck.sh
-RUN /bin/bash /opt/cq/aemstartupcheck.sh
+ADD ./aemstartupcheck2.sh /opt/cq/
+RUN ls -l ./aemstartupcheck2.sh
+RUN sed -i -e 's/\r$//' aemstartupcheck2.sh
+RUN ls -l ./aemstartupcheck2.sh
+RUN /bin/bash /opt/cq/aemstartupcheck2.sh
+WORKDIR /opt/cq/crx-quickstart/bin
+RUN cp quickstart quickstart.original2
+RUN cat quickstart.original2  | sed "s|1024|4096|g" > quickstart
 
 EXPOSE 4502 8000
 ENTRYPOINT ["/opt/cq/crx-quickstart/bin/quickstart"]
