@@ -36,7 +36,10 @@ wget --quiet --no-cookies http://rshare:$password@rshare.rwcms.com/Install_asset
 WORKDIR /opt/cq
 ENV CQ_INTERFACE eth0 
 ADD ./aemstartupcheck.sh /opt/cq/
-RUN /opt/cq/aemstartupcheck.sh
+RUN ls -l ./aemstartupcheck.sh
+RUN sed -i -e 's/\r$//' aemstartupcheck.sh
+RUN ls -l ./aemstartupcheck.sh
+RUN /bin/bash /opt/cq/aemstartupcheck.sh
 
 EXPOSE 4502 8000
 ENTRYPOINT ["/opt/cq/crx-quickstart/bin/quickstart"]

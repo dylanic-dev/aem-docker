@@ -1,4 +1,3 @@
-#!/bin/bash
 cd /opt/cq/
 java -XX:MaxPermSize=512m -Xmx4096M -jar cq-author-4502.jar -unpack -p 4502 -r author
 mkdir /opt/cq/crx-quickstart/install/
